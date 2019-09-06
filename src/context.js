@@ -106,6 +106,8 @@ class ProductProvider extends Component {
         const selectedProduct = tempCart.find(item => item.id === id)
         const index = tempCart.indexOf(selectedProduct);
         const product = tempCart[index];
+
+        product.count = product.count-1;
         
         // change quantity of the selected item
 
@@ -114,14 +116,13 @@ class ProductProvider extends Component {
         }
 
         else{
-            product.count = product.count > 0 ?  product.count - 1 : 0;
+            
             product.total = product.price * product.count;  
-            }        
-        
-        // change the state
-        this.setState(() => {
-            return {cart: [...tempCart]}
-        }, () => {this.addTotals()})    
+            // change the state
+            this.setState(() => {
+                return {cart: [...tempCart]}
+                }, () => {this.addTotals()})  
+            }             
     }
 
     removeItem = (id) => {
