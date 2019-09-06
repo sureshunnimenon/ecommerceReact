@@ -108,11 +108,16 @@ class ProductProvider extends Component {
         const product = tempCart[index];
         
         // change quantity of the selected item
-        
-        product.count = product.count > 0 ?  product.count - 1 : 0;
-        product.total = product.price * product.count;
-        
 
+        if (product.count === 0){
+            this.removeItem(id)
+        }
+
+        else{
+            product.count = product.count > 0 ?  product.count - 1 : 0;
+            product.total = product.price * product.count;  
+            }        
+        
         // change the state
         this.setState(() => {
             return {cart: [...tempCart]}
